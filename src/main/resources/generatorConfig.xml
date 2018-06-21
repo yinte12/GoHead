@@ -47,11 +47,11 @@
         <table tableName="ssm_user" domainObjectName="User" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"></table>
-        <!--<table tableName="ssm_picture" domainObjectName="Picture" enableCountByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--enableUpdateByExample="false"></table>-->
-        <!--<table tableName="ssm_article" domainObjectName="Article" enableCountByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--enableUpdateByExample="false"></table>-->
+        <table tableName="ssm_picture" domainObjectName="Picture" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"></table>
+        <table tableName="ssm_article" domainObjectName="Article" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"></table>
     </context>
 </generatorConfiguration>
