@@ -1,67 +1,63 @@
 package com.gohead.core.entity;
 
-import java.io.Serializable;
+public class Picture {
+    private Integer id;
 
-public class Picture implements Serializable {
-	@Override
-	public String toString() {
-		return "Picture [id=" + id + ", path=" + path + ", type=" + type
-				+ ", time=" + time + ", url=" + url + ", grade=" + grade + "]";
-	}
+    private String path;
 
-	private String id;
-	private String path;// 路径
-	private String type;// 外键类别
-	private String time;// 插入时间
-	private String url;//
-	private String grade;// 另一个外键
+    private Integer type;
 
-	public String getId() {
-		return id;
-	}
+    private String time;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    private String url;
 
-	public String getPath() {
-		return path;
-	}
+    private Integer grade;
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public String getTime() {
-		return time;
-	}
+    public void setPath(String path) {
+        this.path = path == null ? null : path.trim();
+    }
 
-	public void setTime(String time) {
-		this.time = time;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getTime() {
+        return time;
+    }
 
-	public String getGrade() {
-		return grade;
-	}
+    public void setTime(String time) {
+        this.time = time == null ? null : time.trim();
+    }
 
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
+    public String getUrl() {
+        return url;
+    }
 
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
 }

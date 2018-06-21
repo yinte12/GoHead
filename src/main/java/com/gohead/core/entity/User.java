@@ -1,22 +1,13 @@
 package com.gohead.core.entity;
 
-/**
- * @author super me
- * @project_name gohead
- * @date 2017-3-1
- */
 public class User {
+    private Integer id;
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", userName=" + userName + ", password="
-                + password + ", roleName=" + roleName + "]";
-    }
+    private String userName;
 
-    private Integer id; // 主键
-    private String userName; // 用户姓名
-    private String password; // 密码
-    private String roleName; //
+    private String password;
+
+    private String roleName;
 
     public Integer getId() {
         return id;
@@ -31,7 +22,7 @@ public class User {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -39,7 +30,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getRoleName() {
@@ -47,7 +38,6 @@ public class User {
     }
 
     public void setRoleName(String roleName) {
-        this.roleName = roleName;
+        this.roleName = roleName == null ? null : roleName.trim();
     }
-
 }

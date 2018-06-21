@@ -1,61 +1,121 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gohead.core.dao.ArticleDao">
-    <resultMap type="Article" id="ArticleResult">
-        <result property="id" column="id"/>
-        <result property="articleTitle" column="article_title"/>
-        <result property="articleCreateDate" column="article_create_date"/>
-        <result property="articleContent" column="article_content"/>
-        <result property="isTop" column="is_top"/>
-        <result property="addName" column="add_name"/>
-    </resultMap>
-
-    <select id="findArticles" parameterType="Map" resultMap="ArticleResult">
-        select id,article_title,article_create_date,article_content,add_name from ssm_article
-        <where>
-            <if test="articleTitle!=null and articleTitle!='' ">
-                and article_title like #{articleTitle}
-            </if>
-        </where>
-        <if test="start!=null and size!=null">
-            limit #{start},#{size}
-        </if>
-    </select>
-
-    <select id="getTotalArticles" parameterType="Map" resultType="Long">
-        select count(*) from ssm_article
-        <where>
-            <if test="articleTitle!=null and articleTitle!='' ">
-                and article_title like #{articleTitle}
-            </if>
-        </where>
-    </select>
-
-    <insert id="insertArticle" parameterType="Article">
-		insert into
-		ssm_article(article_title,article_create_date,article_content,add_name)
-		values(#{articleTitle},#{articleCreateDate},#{articleContent},#{addName})
-	</insert>
-
-    <update id="updArticle" parameterType="Article">
-		update ssm_article
-		set
-		article_title=#{articleTitle},article_content=#{articleContent},
-		add_name=#{addName}
-		where id=#{id}
-	</update>
-
-
-    <delete id="delArticle" parameterType="String">
-		delete from
-		ssm_article
-		where id=#{id}
-	</delete>
-
-    <select id="getArticleById" parameterType="String" resultMap="ArticleResult">
-		select id,article_title,article_create_date,article_content,add_name
-		from ssm_article where id=#{id}
-	</select>
-</mapper> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gohead.core.mappers.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.gohead.core.entity.Article" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="article_title" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="article_create_date" property="articleCreateDate" jdbcType="VARCHAR" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="add_name" property="addName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gohead.core.entity.Article" extends="BaseResultMap" >
+    <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, article_title, article_create_date, is_top, add_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    article_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ssm_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ssm_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gohead.core.entity.Article" >
+    insert into ssm_article (id, article_title, article_create_date, 
+      is_top, add_name, article_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, #{articleCreateDate,jdbcType=VARCHAR}, 
+      #{isTop,jdbcType=INTEGER}, #{addName,jdbcType=VARCHAR}, #{articleContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gohead.core.entity.Article" >
+    insert into ssm_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="articleTitle != null" >
+        article_title,
+      </if>
+      <if test="articleCreateDate != null" >
+        article_create_date,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="addName != null" >
+        add_name,
+      </if>
+      <if test="articleContent != null" >
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCreateDate != null" >
+        #{articleCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="addName != null" >
+        #{addName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gohead.core.entity.Article" >
+    update ssm_article
+    <set >
+      <if test="articleTitle != null" >
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCreateDate != null" >
+        article_create_date = #{articleCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="addName != null" >
+        add_name = #{addName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gohead.core.entity.Article" >
+    update ssm_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_create_date = #{articleCreateDate,jdbcType=VARCHAR},
+      is_top = #{isTop,jdbcType=INTEGER},
+      add_name = #{addName,jdbcType=VARCHAR},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gohead.core.entity.Article" >
+    update ssm_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_create_date = #{articleCreateDate,jdbcType=VARCHAR},
+      is_top = #{isTop,jdbcType=INTEGER},
+      add_name = #{addName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

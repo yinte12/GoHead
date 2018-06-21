@@ -1,21 +1,23 @@
 package com.gohead.core.entity;
 
-import java.io.Serializable;
+public class Article {
+    private Integer id;
 
-public class Article implements Serializable {
-    private String id;//主键
-    private String articleTitle;//文章标题
-    private String articleCreateDate;//创建日期
-    private String articleContent;//文章内容
-    private int articleClassID;//文章类别id
-    private int isTop;//置顶字段
-    private String addName;//添加者
+    private String articleTitle;
 
-    public String getId() {
+    private String articleCreateDate;
+
+    private Integer isTop;
+
+    private String addName;
+
+    private String articleContent;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,7 +26,7 @@ public class Article implements Serializable {
     }
 
     public void setArticleTitle(String articleTitle) {
-        this.articleTitle = articleTitle;
+        this.articleTitle = articleTitle == null ? null : articleTitle.trim();
     }
 
     public String getArticleCreateDate() {
@@ -32,30 +34,14 @@ public class Article implements Serializable {
     }
 
     public void setArticleCreateDate(String articleCreateDate) {
-        this.articleCreateDate = articleCreateDate;
+        this.articleCreateDate = articleCreateDate == null ? null : articleCreateDate.trim();
     }
 
-    public String getArticleContent() {
-        return articleContent;
-    }
-
-    public void setArticleContent(String articleContent) {
-        this.articleContent = articleContent;
-    }
-
-    public int getArticleClassID() {
-        return articleClassID;
-    }
-
-    public void setArticleClassID(int articleClassID) {
-        this.articleClassID = articleClassID;
-    }
-
-    public int getIsTop() {
+    public Integer getIsTop() {
         return isTop;
     }
 
-    public void setIsTop(int isTop) {
+    public void setIsTop(Integer isTop) {
         this.isTop = isTop;
     }
 
@@ -64,19 +50,14 @@ public class Article implements Serializable {
     }
 
     public void setAddName(String addName) {
-        this.addName = addName;
+        this.addName = addName == null ? null : addName.trim();
     }
 
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id='" + id + '\'' +
-                ", articleTitle='" + articleTitle + '\'' +
-                ", articleCreateDate='" + articleCreateDate + '\'' +
-                ", articleContent='" + articleContent + '\'' +
-                ", articleClassID=" + articleClassID +
-                ", isTop=" + isTop +
-                ", addName='" + addName + '\'' +
-                '}';
+    public String getArticleContent() {
+        return articleContent;
+    }
+
+    public void setArticleContent(String articleContent) {
+        this.articleContent = articleContent == null ? null : articleContent.trim();
     }
 }

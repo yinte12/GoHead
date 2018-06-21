@@ -27,8 +27,8 @@ public class PictureServiceTest {
         picture.setPath("path");
         picture.setTime(DateUtil.getCurrentDateStr());
         picture.setUrl("url");
-        picture.setType("2");
-        picture.setGrade("1");
+        picture.setType(2);
+        picture.setGrade(1);
         pictureService.addPicture(picture);
     }
 
