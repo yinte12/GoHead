@@ -1,13 +1,23 @@
 package com.gohead.core.dao;
 
 import com.gohead.core.entity.Picture;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-@Repository
-public interface PictureDao {
+public interface PictureMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Picture record);
+
+    int insertSelective(Picture record);
+
+    Picture selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Picture record);
+
+    int updateByPrimaryKey(Picture record);
+
     /**
      * 返回相应的数据集合
      *

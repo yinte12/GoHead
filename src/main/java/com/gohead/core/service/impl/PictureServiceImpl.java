@@ -1,6 +1,6 @@
 package com.gohead.core.service.impl;
 
-import com.gohead.core.dao.PictureDao;
+import com.gohead.core.dao.PictureMapper;
 import com.gohead.core.entity.Picture;
 import com.gohead.core.service.PictureService;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Service("pictureService")
 public class PictureServiceImpl implements PictureService {
     @Resource
-    private PictureDao pd;
+    private PictureMapper pd;
 
     @Override
     public List<Picture> findPicture(Map<String, Object> map) {

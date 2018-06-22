@@ -1,7 +1,7 @@
 package dao.test;
 
 
-import com.gohead.core.dao.UserDao;
+import com.gohead.core.dao.UserMapper;
 import com.gohead.core.entity.User;
 import com.gohead.core.util.MD5Util;
 import org.junit.Assert;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(transactionManager = "transactionManager")//默认回滚,即此类中的方法即使执行成功,数据也并不会真正的修改,方法执行后会回滚.
 public class UserDaoTest {
     @Autowired
-    private UserDao userDao;
+    private UserMapper userDao;
 
     @Test
     public void loginTest() {
@@ -57,12 +57,12 @@ public class UserDaoTest {
     @Test
     public void updateUserTest() {
         User user = new User();
-        user.setId(51);
+        user.setId(87);
         user.setPassword("1221");
         //大于0的意思是成功修改了一条记录,即修改成功,如果updateUser()方法返回值等于0,即修改失败
         Assert.assertTrue(userDao.updateUser(user) > 0);
         User user2 = new User();
-        user2.setId(1000);
+        user2.setId(87);
         user2.setPassword("234y9823y89hhao");
         Assert.assertTrue(userDao.updateUser(user2) > 0);
     }
@@ -78,7 +78,7 @@ public class UserDaoTest {
 
     @Test
     public void deleteUserTest() {
-        Assert.assertTrue(userDao.deleteUser(51) > 0);
+        Assert.assertTrue(userDao.deleteUser(87) > 0);
     }
 
 }

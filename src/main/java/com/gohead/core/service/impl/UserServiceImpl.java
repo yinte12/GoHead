@@ -1,6 +1,6 @@
 package com.gohead.core.service.impl;
 
-import com.gohead.core.dao.UserDao;
+import com.gohead.core.dao.UserMapper;
 import com.gohead.core.entity.User;
 import com.gohead.core.service.UserService;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserDao userDao;
+    private UserMapper userDao;
 
     @Override
     public User login(User user) {

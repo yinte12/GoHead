@@ -3,7 +3,7 @@ package com.gohead.core.service.impl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import com.gohead.core.dao.ArticleDao;
+import com.gohead.core.dao.ArticleMapper;
 import com.gohead.core.entity.Article;
 import com.gohead.core.service.ArticleService;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class ArticleServiceImpl implements ArticleService {
 
     @Resource
-    private ArticleDao articleDao;
+    private ArticleMapper articleDao;
 
     @Override
     public List<Article> findArticle(Map<String, Object> map) {

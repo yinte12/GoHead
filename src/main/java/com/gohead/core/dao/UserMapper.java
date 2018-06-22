@@ -1,18 +1,22 @@
 package com.gohead.core.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.gohead.core.entity.User;
+
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author super me
- * @project_name gohead
- * @date 2017-3-1
- */
-@Repository
-public interface UserDao {
+public interface UserMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 
     /**
      * 登录
