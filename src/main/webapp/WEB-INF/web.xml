@@ -6,7 +6,7 @@
         version="3.0"
         metadata-complete="true">
 
-    <display-name>ssm-promotion</display-name>
+    <display-name>perfect-ssm</display-name>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
@@ -54,7 +54,14 @@
         <error-code>404</error-code>
         <location>/main.jsp</location>
     </error-page>
-
+    <error-page>
+        <error-code>405</error-code>
+        <location>/main.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>415</error-code>
+        <location>/main.jsp</location>
+    </error-page>
     <error-page>
         <error-code>500</error-code>
         <location>/main.jsp</location>
