@@ -2,24 +2,20 @@ package com.gohead.core.admin;
 
 import com.gohead.core.common.Result;
 import com.gohead.core.common.ResultGenerator;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import com.gohead.core.entity.PageBean;
 import com.gohead.core.entity.User;
 import com.gohead.core.service.UserService;
 import com.gohead.core.util.MD5Util;
 import com.gohead.core.util.ResponseUtil;
 import com.gohead.core.util.StringUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +39,9 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/cookie", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result login(User user) {
+    public Result login(User user, HttpServletResponse response) {
         try {
             String MD5pwd = MD5Util.MD5Encode(user.getPassword(), "UTF-8");
             user.setPassword(MD5pwd);
