@@ -20,9 +20,7 @@ function login() {
                 setCookie("userName", result.data.currentUser.userName);
                 setCookie("roleName", result.data.currentUser.roleName);
                 window.location.href = "main.jsp";
-            }
-            ;
-
+            };
         },
         error: function () {
             alert("异常！");
