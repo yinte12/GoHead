@@ -1,6 +1,9 @@
 package com.gohead.core.entity;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
+    private static final long serialVersionUID = 685160963402326262L;
     private Integer id;
 
     private String articleTitle;
