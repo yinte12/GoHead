@@ -1,5 +1,6 @@
 package com.gohead.core.admin;
 
+import com.gohead.core.common.Constants;
 import com.gohead.core.common.Result;
 import com.gohead.core.common.ResultGenerator;
 import com.gohead.core.entity.Article;
@@ -164,7 +165,7 @@ public class ArticleController {
 	@ResponseBody
 	public Result delete(@PathVariable("ids") String ids) throws Exception {
 		if (ids.length() > 20) {
-			return ResultGenerator.genFailResult("ERROR");
+			return ResultGenerator.genFailResult(Constants.DEFAULT_ERROR_MESSAGE);
 		}
 		String[] idsStr = ids.split(",");
 		for (int i = 0; i < idsStr.length; i++) {

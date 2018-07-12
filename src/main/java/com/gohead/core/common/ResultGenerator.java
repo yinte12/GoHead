@@ -4,8 +4,8 @@ package com.gohead.core.common;
  * 响应结果生成工具
  */
 public class ResultGenerator {
-    private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
-    private static final String DEFAULT_FAIL_MESSAGE = "FAIL";
+    public static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
+    public static final String DEFAULT_FAIL_MESSAGE = "FAIL";
 
     public static Result genSuccessResult() {
         Result result = new Result();
