@@ -7,23 +7,23 @@ import java.io.Serializable;
  */
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int resultCode;
-    private String message;
-    private T data;
+    protected long resultCode;
+    protected String message;
+    protected T data;
 
     public Result() {
     }
 
-    public Result(int resultCode, String message) {
+    public Result(long resultCode, String message) {
         this.resultCode = resultCode;
         this.message = message;
     }
 
-    public int getResultCode() {
+    public long getResultCode() {
         return resultCode;
     }
 
-    public void setResultCode(int resultCode) {
+    public void setResultCode(long resultCode) {
         this.resultCode = resultCode;
     }
 

@@ -6,6 +6,7 @@ import com.gohead.core.common.ResultGenerator;
 import com.gohead.core.entity.PageBean;
 import com.gohead.core.entity.User;
 import com.gohead.core.service.UserService;
+import com.gohead.core.util.JwtUtil;
 import com.gohead.core.util.MD5Util;
 import com.gohead.core.util.ResponseUtil;
 import com.gohead.core.util.StringUtil;
@@ -43,9 +44,11 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result login(@RequestBody User user) {
+        String token = "";
         try {
             String MD5pwd = MD5Util.MD5Encode(user.getPassword(), "UTF-8");
             user.setPassword(MD5pwd);
+            token = JwtUtil.generatorToken();
         } catch (Exception e) {
             user.setPassword("");
         }
@@ -55,7 +58,7 @@ public class UserController {
             return ResultGenerator.genFailResult("请认真核对账号、密码！");
         } else {
             resultUser.setPassword("PASSWORD");
-            return ResultGenerator.genSuccessResult(resultUser);
+            return ResultGenerator.getSuccessResult(resultUser, token);
         }
     }
 

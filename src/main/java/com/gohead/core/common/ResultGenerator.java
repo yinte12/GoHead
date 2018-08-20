@@ -32,4 +32,20 @@ public class ResultGenerator {
         return result;
     }
 
+    public static TokenResult getSuccessResult(Object data, String token) {
+        TokenResult result = new TokenResult();
+        result.setResultCode(Constants.RESULT_CODE_SUCCESS);
+        result.setMessage(DEFAULT_SUCCESS_MESSAGE);
+        result.setData(data);
+        result.setToken(token);
+        return result;
+    }
+
+    public static Result getErrorResult(String msg, long code) {
+        Result result = new Result();
+        result.setResultCode(code);
+        result.setMessage(msg);
+        return result;
+    }
+
 }
