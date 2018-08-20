@@ -88,6 +88,21 @@ public class JwtUtil {
         return claims;
     }
 
+    public static boolean isValidToken(String token) {
+        try {
+            Claims claims = parseToken(token);
+            long expirationTime = claims.getExpiration().getTime();
+            if (expirationTime >= System.currentTimeMillis()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 //    public static void main(String[] args) throws Exception {
 //        JwtUtil util = new JwtUtil();
 //        String ab= util.generatToken("{id:100,name:xiaohong}");

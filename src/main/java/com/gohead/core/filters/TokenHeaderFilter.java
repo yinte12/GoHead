@@ -32,7 +32,7 @@ public class TokenHeaderFilter implements HandlerInterceptor {
             return true;
         } else {
             token = request.getHeader("token");
-            if (token == null) {
+            if (token == null || !JwtUtil.isValidToken(token)) {
                 Result result = ResultGenerator.getErrorResult(Constants.RESULT_STRING_INVALID_TOKEN, Constants.RESULT_CODE_INVALID_TOKEN);
                 dealErrorReturn(request, response, JSON.toJSONString(result));
                 return false;
