@@ -41,6 +41,16 @@ public class ResultGenerator {
         return result;
     }
 
+    public static CountResult getSuccessResult(Object data, int page, int total) {
+        CountResult result = new CountResult();
+        result.setResultCode(Constants.RESULT_CODE_SUCCESS);
+        result.setMessage(DEFAULT_SUCCESS_MESSAGE);
+        result.setData(data);
+        result.setPage(page);
+        result.setTotle(total);
+        return result;
+    }
+
     public static Result getErrorResult(String msg, long code) {
         Result result = new Result();
         result.setResultCode(code);

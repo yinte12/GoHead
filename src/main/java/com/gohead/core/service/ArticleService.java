@@ -21,7 +21,7 @@ public interface ArticleService {
 	 * @param map
 	 * @return
 	 */
-	public Long getTotalArticle(Map<String, Object> map);
+	public Integer getTotalArticle(Map<String, Object> map);
 
 	/**
 	 * 添加文章

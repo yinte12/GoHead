@@ -34,21 +34,21 @@ public class ArticleController {
 	 * 查找相应的数据集合
 	 *
 	 * @param page
-	 * @param rows
+	 * @param pageSize
 	 * @param article
 	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
-	public String list(
+	public Result list(
 			@RequestParam(value = "page", required = false) String page,
-			@RequestParam(value = "rows", required = false) String rows,
+			@RequestParam(value = "pageSize", required = false) String pageSize,
 			Article article, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (page != null && rows != null) {
+		if (page != null && pageSize != null) {
 			PageBean pageBean = new PageBean(Integer.parseInt(page),
-					Integer.parseInt(rows));
+					Integer.parseInt(pageSize));
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
@@ -57,21 +57,16 @@ public class ArticleController {
 					StringUtil.formatLike(article.getArticleTitle()));
 		}
 		List<Article> articleList = articleService.findArticle(map);
-		Long total = articleService.getTotalArticle(map);
-		JSONObject result = new JSONObject();
+		Integer total = articleService.getTotalArticle(map);
 		JSONArray jsonArray = JSONArray.fromObject(articleList);
-		result.put("rows", jsonArray);
-		result.put("total", total);
-		log.info("request: article/list , map: " + map.toString());
-		ResponseUtil.write(response, result);
-		return null;
+		return ResultGenerator.getSuccessResult(jsonArray, Integer.parseInt(page), total);
 	}
 
 	/**
 	 * 查找相应的数据集合
 	 *
 	 * @param page
-	 * @param rows
+	 * @param pageSize
 	 * @param article
 	 * @return
 	 * @throws Exception
@@ -80,12 +75,12 @@ public class ArticleController {
 	@ResponseBody
 	public Result list(
 			@RequestParam(value = "page", required = false) String page,
-			@RequestParam(value = "rows", required = false) String rows,
+			@RequestParam(value = "pageSize", required = false) String pageSize,
 			Article article) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (page != null && rows != null) {
+		if (page != null && pageSize != null) {
 			PageBean pageBean = new PageBean(Integer.parseInt(page),
-					Integer.parseInt(rows));
+					Integer.parseInt(pageSize));
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
@@ -94,7 +89,7 @@ public class ArticleController {
 					StringUtil.formatLike(article.getArticleTitle()));
 		}
 		List<Article> articleList = articleService.findArticle(map);
-		Long total = articleService.getTotalArticle(map);
+		Integer total = articleService.getTotalArticle(map);
 
 		Result result = ResultGenerator.genSuccessResult();
 		Map data = new HashMap();

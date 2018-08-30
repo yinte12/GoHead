@@ -22,7 +22,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Long getTotalArticle(Map<String, Object> map) {
+    public Integer getTotalArticle(Map<String, Object> map) {
         return articleDao.getTotalArticles(map);
     }
 

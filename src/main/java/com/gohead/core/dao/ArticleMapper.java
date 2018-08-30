@@ -34,7 +34,7 @@ public interface ArticleMapper {
      * @param map
      * @return
      */
-    public Long getTotalArticles(Map<String, Object> map);
+    public int getTotalArticles(Map<String, Object> map);
 
     /**
      * 添加文章
