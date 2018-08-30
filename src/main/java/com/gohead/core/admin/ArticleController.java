@@ -1,6 +1,7 @@
 package com.gohead.core.admin;
 
 import com.gohead.core.common.Constants;
+import com.gohead.core.common.CountResult;
 import com.gohead.core.common.Result;
 import com.gohead.core.common.ResultGenerator;
 import com.gohead.core.entity.Article;
@@ -40,10 +41,11 @@ public class ArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
-	public Result list(
-			@RequestParam(value = "page", required = false) String page,
-			@RequestParam(value = "pageSize", required = false) String pageSize,
+	@RequestMapping(value = "/query/page/{page}/pageSize/{pageSize}", method = RequestMethod.GET)
+	@ResponseBody
+	public CountResult list(
+			@PathVariable("page") String page,
+			@PathVariable("pageSize") String pageSize,
 			Article article, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (page != null && pageSize != null) {
@@ -58,8 +60,7 @@ public class ArticleController {
 		}
 		List<Article> articleList = articleService.findArticle(map);
 		Integer total = articleService.getTotalArticle(map);
-		JSONArray jsonArray = JSONArray.fromObject(articleList);
-		return ResultGenerator.getSuccessResult(jsonArray, Integer.parseInt(page), total);
+		return ResultGenerator.getSuccessResult(articleList, Integer.parseInt(page), total);
 	}
 
 	/**

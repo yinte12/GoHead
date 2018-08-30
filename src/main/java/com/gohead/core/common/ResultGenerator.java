@@ -1,5 +1,7 @@
 package com.gohead.core.common;
 
+import java.util.List;
+
 /**
  * 响应结果生成工具
  */
@@ -41,13 +43,13 @@ public class ResultGenerator {
         return result;
     }
 
-    public static CountResult getSuccessResult(Object data, int page, int total) {
+    public static CountResult getSuccessResult(List<?> data, int page, int total) {
         CountResult result = new CountResult();
         result.setResultCode(Constants.RESULT_CODE_SUCCESS);
         result.setMessage(DEFAULT_SUCCESS_MESSAGE);
         result.setData(data);
         result.setPage(page);
-        result.setTotle(total);
+        result.setTotal(total);
         return result;
     }
 

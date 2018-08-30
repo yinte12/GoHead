@@ -131,7 +131,7 @@
     </if>
   </select>
 
-  <select id="getTotalArticles" parameterType="Map" resultType="java.lang.Long">
+  <select id="getTotalArticles" parameterType="Map" resultType="java.lang.Integer">
     select count(*) from ssm_article
     <where>
       <if test="articleTitle!=null and articleTitle!='' ">
