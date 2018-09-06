@@ -9,13 +9,16 @@
     <result column="add_name" property="addName" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gohead.core.entity.Article">
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, article_title, article_create_date, is_top, add_name, user_id
   </sql>
   <sql id="Blob_Column_List" >
     article_content
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -135,7 +138,7 @@
       </if>
     </where>
   </select>
-  <select id="findArticles" parameterType="Map" resultMap="BaseResultMap">
+  <select id="findArticles" parameterType="Map" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
