@@ -31,7 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
         if (article.getArticleTitle() == null || article.getArticleContent() == null || getTotalArticle(null) > 90 || article.getArticleContent().length() > 50000) {
             return 0;
         }
-        return articleDao.insertArticle(article);
+        return articleDao.insert(article);
     }
 
     @Override
@@ -39,17 +39,17 @@ public class ArticleServiceImpl implements ArticleService {
         if (article.getArticleTitle() == null || article.getArticleContent() == null || getTotalArticle(null) > 90 || article.getArticleContent().length() > 50000) {
             return 0;
         }
-        return articleDao.updArticle(article);
+        return articleDao.updateByPrimaryKey(article);
     }
 
     @Override
     public int deleteArticle(String id) {
-        return articleDao.delArticle(id);
+        return articleDao.deleteByPrimaryKey(Integer.valueOf(id));
     }
 
     @Override
     public Article findById(String id) {
-        return articleDao.getArticleById(id);
+        return articleDao.selectByPrimaryKey(Integer.valueOf(id));
     }
 
 }

@@ -1,9 +1,6 @@
 package com.gohead.core.entity;
 
-import java.io.Serializable;
-
-public class Article implements Serializable {
-    private static final long serialVersionUID = 685160963402326262L;
+public class Article {
     private Integer id;
 
     private String articleTitle;
@@ -13,6 +10,8 @@ public class Article implements Serializable {
     private Integer isTop;
 
     private String addName;
+
+    private Integer userId;
 
     private String articleContent;
 
@@ -54,6 +53,14 @@ public class Article implements Serializable {
 
     public void setAddName(String addName) {
         this.addName = addName == null ? null : addName.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getArticleContent() {

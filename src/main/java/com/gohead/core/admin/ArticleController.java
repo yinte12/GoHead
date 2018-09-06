@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -46,13 +47,14 @@ public class ArticleController {
 	public CountResult list(
 			@PathVariable("page") String page,
 			@PathVariable("pageSize") String pageSize,
-			Article article, HttpServletResponse response) throws Exception {
+			Article article, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (page != null && pageSize != null) {
 			PageBean pageBean = new PageBean(Integer.parseInt(page),
 					Integer.parseInt(pageSize));
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
+			map.put("userId", request.getHeader("userId"));
 		}
 		if (article != null) {
 			map.put("articleTitle",

@@ -50,11 +50,11 @@
         <!--<table tableName="ssm_picture" domainObjectName="Picture" enableCountByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--enableUpdateByExample="false"></table>-->
-        <!--<table tableName="ssm_article" domainObjectName="Article" enableCountByExample="false"-->
+        <!--<table tableName="tb_article" domainObjectName="Article" enableCountByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--enableUpdateByExample="false"></table>-->
-        <table tableName="db_user_info" domainObjectName="UserInfo" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+        <!--<table tableName="db_user_info" domainObjectName="UserInfo" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false"></table>-->
     </context>
 </generatorConfiguration>

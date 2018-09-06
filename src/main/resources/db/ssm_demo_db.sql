@@ -29,32 +29,9 @@ CREATE TABLE `db_user_info` (
 -- Records of db_user_info
 -- ----------------------------
 BEGIN;
-INSERT INTO `db_user_info` VALUES (2, 'admin', 'https://pic3.zhimg.com/v2-5af460972557190bd4306ad66f360d4a.jpg', '1373527822', 'yinte@163.com', 'enginer');
-INSERT INTO `db_user_info` VALUES (86, 'asdf', 'https://pic3.zhimg.com/v2-5af460972557190bd4306ad66f360d4a.jpg', '1373527822', 'yinte@163.com', 'enginer');
-INSERT INTO `db_user_info` VALUES (87, 'ads', 'https://pic3.zhimg.com/v2-5af460972557190bd4306ad66f360d4a.jpg', '1373527822', 'yinte@163.com', 'enginer');
-COMMIT;
-
--- ----------------------------
--- Table structure for ssm_article
--- ----------------------------
-DROP TABLE IF EXISTS `ssm_article`;
-CREATE TABLE `ssm_article` (
-  `id` int(4) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `article_title` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '文章标题',
-  `article_create_date` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '创建时间',
-  `article_content` text COLLATE utf8_bin NOT NULL COMMENT '文章内容',
-  `is_top` int(4) NOT NULL DEFAULT '0' COMMENT '是否置顶，1为置顶，默认为0',
-  `add_name` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '添加人',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1044 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of ssm_article
--- ----------------------------
-BEGIN;
-INSERT INTO `ssm_article` VALUES (1040, '1', '2017-04-23 14:27:15', '<p>123213<img src=\"/ueditor/jsp/upload/image/20170423/1492928816968019785.jpg\" title=\"1492928816968019785.jpg\" alt=\"u=2900951343,2042642273&amp;fm=23&amp;gp=0.jpg\"/></p>', 0, '2');
-INSERT INTO `ssm_article` VALUES (1042, '1', '2017-04-23 16:52:46', '<p>1</p>', 0, '1');
-INSERT INTO `ssm_article` VALUES (1043, '1', '2017-04-23 22:46:39', '<p>112</p>', 0, '1');
+INSERT INTO `db_user_info` VALUES (2, 'admin', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
+INSERT INTO `db_user_info` VALUES (86, 'asdf', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
+INSERT INTO `db_user_info` VALUES (87, 'ads', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
 COMMIT;
 
 -- ----------------------------
@@ -456,9 +433,35 @@ CREATE TABLE `ssm_user` (
 -- Records of ssm_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `ssm_user` VALUES (2, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '系统管理员');
-INSERT INTO `ssm_user` VALUES (86, 'asdf', 'cc83733cb0af8b884ff6577086b87909', '普通管理员');
-INSERT INTO `ssm_user` VALUES (87, 'ads', '36b74e397832402c57934da8c172fd83', '普通管理员');
+INSERT INTO `ssm_user` VALUES (2, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin');
+INSERT INTO `ssm_user` VALUES (86, 'asdf', 'cc83733cb0af8b884ff6577086b87909', 'user');
+INSERT INTO `ssm_user` VALUES (87, 'ads', '36b74e397832402c57934da8c172fd83', 'user');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for tb_article
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_article`;
+CREATE TABLE `tb_article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `article_title` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '文章标题',
+  `article_create_date` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '创建时间',
+  `article_content` text COLLATE utf8_bin NOT NULL COMMENT '文章内容',
+  `is_top` int(4) NOT NULL DEFAULT '0' COMMENT '是否置顶，1为置顶，默认为0',
+  `add_name` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '添加人',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`),
+  KEY `FK_ID` (`user_id`),
+  CONSTRAINT `FK_ID` FOREIGN KEY (`user_id`) REFERENCES `ssm_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1044 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of tb_article
+-- ----------------------------
+BEGIN;
+INSERT INTO `tb_article` VALUES (1, '替替', '2017-04-23 14:27:15', '我们每个人都会经历一些需要一个人度过的时间。', 0, '2', 2);
+INSERT INTO `tb_article` VALUES (2, '天天', '2017-04-23 16:52:46', '我们每个人都会经历一些需要一个人度过的时间。', 0, '1', 2);
+INSERT INTO `tb_article` VALUES (3, '年年', '2017-04-23 22:46:39', '我们每个人都会经历一些需要一个人度过的时间。', 0, '1', 2);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
