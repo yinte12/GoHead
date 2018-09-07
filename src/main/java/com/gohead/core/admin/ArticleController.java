@@ -109,13 +109,16 @@ public class ArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Result save(@RequestBody Article article)
+	public Result save(@RequestBody Article article, HttpServletRequest request)
 			throws Exception {
 		int resultTotal = 0;
 
+		int userId = Integer.valueOf(request.getHeader("userId"));
+		article.setUserId(userId);
 		article.setArticleCreateDate(DateUtil.getCurrentDateStr());
+		article.setTop(0);
 
 		resultTotal = articleService.addArticle(article);
 
@@ -135,12 +138,11 @@ public class ArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseBody
 	public Result update(@RequestBody Article article)
 			throws Exception {
 		int resultTotal = 0;
-
 		resultTotal = articleService.updateArticle(article);
 
 		log.info("request: article/update , " + article.toString());
@@ -159,18 +161,16 @@ public class ArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/{ids}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Result delete(@PathVariable("ids") String ids) throws Exception {
-		if (ids.length() > 20) {
+	public Result delete(@RequestBody Article article) throws Exception {
+		int userId = article.getId();
+		if (userId > 0) {
+			articleService.deleteArticle(String.valueOf(userId));
+		} else {
 			return ResultGenerator.genFailResult(Constants.DEFAULT_ERROR_MESSAGE);
 		}
-		String[] idsStr = ids.split(",");
-		for (int i = 0; i < idsStr.length; i++) {
-			articleService.deleteArticle(idsStr[i]);
-		}
 
-		log.info("request: article/delete , ids: " + ids);
 		return ResultGenerator.genSuccessResult();
 	}
 

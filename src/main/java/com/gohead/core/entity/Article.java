@@ -39,11 +39,11 @@ public class Article {
         this.articleCreateDate = articleCreateDate == null ? null : articleCreateDate.trim();
     }
 
-    public Integer getIsTop() {
+    public Integer getTop() {
         return isTop;
     }
 
-    public void setIsTop(Integer isTop) {
+    public void setTop(int isTop) {
         this.isTop = isTop;
     }
 

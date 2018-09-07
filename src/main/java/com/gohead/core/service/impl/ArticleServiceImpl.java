@@ -39,7 +39,7 @@ public class ArticleServiceImpl implements ArticleService {
         if (article.getArticleTitle() == null || article.getArticleContent() == null || getTotalArticle(null) > 90 || article.getArticleContent().length() > 50000) {
             return 0;
         }
-        return articleDao.updateByPrimaryKey(article);
+        return articleDao.updateByPrimaryKeyWithBLOBs(article);
     }
 
     @Override
