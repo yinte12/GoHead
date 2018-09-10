@@ -1,6 +1,7 @@
 package com.gohead.core.admin;
 
 import com.gohead.core.common.Constants;
+import com.gohead.core.common.CountResult;
 import com.gohead.core.common.Result;
 import com.gohead.core.common.ResultGenerator;
 import com.gohead.core.entity.PageBean;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -89,13 +91,37 @@ public class UserController {
         return null;
     }
 
+    @RequestMapping(value = "/query/page/{page}/pageSize/{pageSize}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result list(@PathVariable("page") String page,
+                            @PathVariable("pageSize") String pageSize,
+                            HttpServletRequest request) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (page != null && pageSize != null) {
+            PageBean pageBean = new PageBean(Integer.valueOf(page),
+                    Integer.valueOf(pageSize));
+            map.put("start", pageBean.getStart());
+            map.put("size", pageBean.getPageSize());
+            map.put("userId", request.getHeader("userId"));
+        }
+        List<User> list = userService.findUser(map);
+        long total = userService.getTotalUser(map);
+
+        Result result = ResultGenerator.genSuccessResult();
+        Map data = new HashMap();
+        data.put("rows", list);
+        data.put("total", total);
+        result.setData(data);
+        return result;
+    }
+
     /**
      * 添加或修改管理员
      *
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Result save(@RequestBody User user) throws Exception {
         int resultTotal = 0;
@@ -116,7 +142,7 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     @ResponseBody
     public Result update(@RequestBody User user) throws Exception {
         String MD5pwd = MD5Util.MD5Encode(user.getPassword(), "UTF-8");
@@ -137,7 +163,7 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/{ids}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "delete/{ids}", method = RequestMethod.DELETE)
     @ResponseBody
     public Result delete(@PathVariable(value = "ids") String ids) throws Exception {
         if (ids.length() > 20) {

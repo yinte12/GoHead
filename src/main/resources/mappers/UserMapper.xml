@@ -107,8 +107,8 @@
   </select>
 
   <insert id="addUser" parameterType="com.gohead.core.entity.User">
-    insert into ssm_user(user_name,password)
-    values(#{userName},#{password})
+    insert into ssm_user(user_name,password,role_name)
+    values(#{userName},#{password},#{roleName})
   </insert>
 
   <update id="updateUser" parameterType="com.gohead.core.entity.User" >
