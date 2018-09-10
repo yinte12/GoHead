@@ -1,6 +1,6 @@
 package com.gohead.core.entity;
 
-public class UserInfo {
+public class UserInfo extends User{
     private Integer id;
 
     private String userName;
@@ -12,6 +12,8 @@ public class UserInfo {
     private String email;
 
     private String work;
+
+    private Integer uid;
 
     public Integer getId() {
         return id;

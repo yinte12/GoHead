@@ -11,22 +11,22 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for db_user_info
+-- Table structure for tb_user_info
 -- ----------------------------
-DROP TABLE IF EXISTS `db_user_info`;
-CREATE TABLE `db_user_info` (
+CREATE TABLE `tb_user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_name` varchar(100) NOT NULL DEFAULT '' COMMENT '用户姓名',
   `user_avator` varchar(150) NOT NULL DEFAULT '' COMMENT '用户头像',
   `phone` varchar(30) NOT NULL DEFAULT '' COMMENT '手机号',
   `email` varchar(30) NOT NULL DEFAULT '' COMMENT '电子邮箱',
   `work` varchar(100) NOT NULL DEFAULT '' COMMENT '用户职业',
+  `uid` int(11) NOT NULL COMMENT '外键',
   PRIMARY KEY (`id`),
-  CONSTRAINT `db_user_info_ibfk_1` FOREIGN KEY (`id`) REFERENCES `ssm_user` (`id`)
+  CONSTRAINT `db_user_info_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `ssm_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of db_user_info
+-- Records of tb_user_info
 -- ----------------------------
 BEGIN;
 INSERT INTO `db_user_info` VALUES (2, 'admin', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
