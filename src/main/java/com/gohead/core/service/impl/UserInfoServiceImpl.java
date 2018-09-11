@@ -29,7 +29,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public Long getTotalUserInfo(Map<String, Object> map) {
+    public int getTotalUserInfo(Map<String, Object> map) {
         return userInfoDao.getTotalUserInfo(map);
     }
 

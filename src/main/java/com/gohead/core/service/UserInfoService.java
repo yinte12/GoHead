@@ -26,7 +26,7 @@ public interface UserInfoService {
      * @param map
      * @return
      */
-    public Long getTotalUserInfo(Map<String, Object> map);
+    public int getTotalUserInfo(Map<String, Object> map);
 
     /**
      * @param userInfo

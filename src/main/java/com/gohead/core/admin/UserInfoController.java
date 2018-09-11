@@ -1,6 +1,7 @@
 package com.gohead.core.admin;
 
 import com.gohead.core.common.Constants;
+import com.gohead.core.common.CountResult;
 import com.gohead.core.common.Result;
 import com.gohead.core.common.ResultGenerator;
 import com.gohead.core.entity.PageBean;
@@ -29,11 +30,23 @@ public class UserInfoController {
 
     private static final Logger log = Logger.getLogger(UserInfoController.class);// 日志文件
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result getUserInfo(@PathVariable(value = "id") String id) throws Exception {
+        UserInfo userInfo = userInfoService.selectUserInfo(Integer.valueOf(id));
+        log.info("request: userInfo/select , userInfo: " + userInfo.toString());
+        if (userInfo == null) {
+            return ResultGenerator.genFailResult(Constants.RESULT_EMPTY_REQUEST);
+        } else {
+            return ResultGenerator.genSuccessResult(userInfo);
+        }
+    }
+
     @RequestMapping(value = "/query/page/{page}/pageSize/{pageSize}", method = RequestMethod.GET)
     @ResponseBody
-    public Result list(@PathVariable("page") String page,
-                       @PathVariable("pageSize") String pageSize,
-                       HttpServletRequest request) throws Exception {
+    public CountResult list(@PathVariable("page") String page,
+                            @PathVariable("pageSize") String pageSize,
+                            HttpServletRequest request) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         if (page != null && pageSize != null) {
             PageBean pageBean = new PageBean(Integer.valueOf(page),
@@ -41,15 +54,10 @@ public class UserInfoController {
             map.put("start", pageBean.getStart());
             map.put("size", pageBean.getPageSize());
         }
-        List<UserInfo> list = userInfoService.findUserInfo(map);
-        long total = userInfoService.getTotalUserInfo(map);
 
-        Result result = ResultGenerator.genSuccessResult();
-        Map data = new HashMap();
-        data.put("rows", list);
-        data.put("total", total);
-        result.setData(data);
-        return result;
+        List<UserInfo> userInfoList = userInfoService.findUserInfo(map);
+        int total = userInfoService.getTotalUserInfo(map);
+        return ResultGenerator.getSuccessResult(userInfoList, Integer.parseInt(page), total);
     }
 
 

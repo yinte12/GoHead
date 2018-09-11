@@ -37,5 +37,5 @@ public interface UserInfoMapper {
      * @param map
      * @return
      */
-    public Long getTotalUserInfo(Map<String, Object> map);
+    public int getTotalUserInfo(Map<String, Object> map);
 }

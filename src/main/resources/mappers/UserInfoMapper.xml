@@ -37,7 +37,7 @@
       limit #{start},#{size}
     </if>
   </select>
-  <select id="getTotalUserInfo" parameterType="Map" resultType="java.lang.Long">
+  <select id="getTotalUserInfo" parameterType="Map" resultType="java.lang.Integer">
     select count(*) from tb_user_info
   </select>
   <delete id="deleteUserInfo" parameterType="java.lang.Integer" >

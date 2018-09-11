@@ -93,7 +93,7 @@ public class UserController {
 
     @RequestMapping(value = "/query/page/{page}/pageSize/{pageSize}", method = RequestMethod.GET)
     @ResponseBody
-    public Result list(@PathVariable("page") String page,
+    public CountResult list(@PathVariable("page") String page,
                             @PathVariable("pageSize") String pageSize,
                             HttpServletRequest request) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -106,13 +106,7 @@ public class UserController {
         }
         List<User> list = userService.findUser(map);
         long total = userService.getTotalUser(map);
-
-        Result result = ResultGenerator.genSuccessResult();
-        Map data = new HashMap();
-        data.put("rows", list);
-        data.put("total", total);
-        result.setData(data);
-        return result;
+        return ResultGenerator.getSuccessResult(list, Integer.parseInt(page), (int)total);
     }
 
     /**
