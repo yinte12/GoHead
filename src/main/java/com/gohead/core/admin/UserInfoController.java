@@ -5,6 +5,7 @@ import com.gohead.core.common.Result;
 import com.gohead.core.common.ResultGenerator;
 import com.gohead.core.entity.UserInfo;
 import com.gohead.core.service.UserInfoService;
+import com.gohead.core.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class UserInfoController {
 
     @Resource
     private UserInfoService userInfoService;
+
     private static final Logger log = Logger.getLogger(UserInfoController.class);// 日志文件
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

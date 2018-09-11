@@ -29,9 +29,9 @@ CREATE TABLE `tb_user_info` (
 -- Records of tb_user_info
 -- ----------------------------
 BEGIN;
-INSERT INTO `db_user_info` VALUES (2, 'admin', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
-INSERT INTO `db_user_info` VALUES (86, 'asdf', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
-INSERT INTO `db_user_info` VALUES (87, 'ads', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
+INSERT INTO `tb_user_info` VALUES (2, 'admin', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
+INSERT INTO `tb_user_info` VALUES (86, 'asdf', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
+INSERT INTO `tb_user_info` VALUES (87, 'ads', 'https://pic3.zhimg.com/v2-28845fa461612ff17574cbb08fe7d07a.jpg', '1373527822', 'yinte@163.com', 'enginer');
 COMMIT;
 
 -- ----------------------------

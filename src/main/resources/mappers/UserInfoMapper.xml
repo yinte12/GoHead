@@ -9,11 +9,19 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="work" property="work" jdbcType="VARCHAR" />
     <result column="uid" property="uid" javaType="INTEGER"/>
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <association property="user" javaType="com.gohead.core.entity.User">
+      <!-- 关联查询用户的唯一标识
+           column：指定唯一标识用户信息的列
+           property：映射到user的哪个属性
+        -->
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="password" property="password" jdbcType="VARCHAR" />
+      <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List" >
-    tb_user_info.id, tb_user_info.user_name, user_avator, phone, email, work, uid, password, role_name
+    tb_user_info.*, ssm_user.*
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
