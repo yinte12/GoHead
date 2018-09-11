@@ -6,6 +6,8 @@ import com.gohead.core.service.UserInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by super on 2018/7/12.
@@ -22,17 +24,31 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public int updateUser(UserInfo userInfo) {
-        return userInfoDao.updateByPrimaryKey(userInfo);
+    public List<UserInfo> findUserInfo(Map<String, Object> map) {
+        return userInfoDao.findUserInfo(map);
+    }
+
+    @Override
+    public Long getTotalUserInfo(Map<String, Object> map) {
+        return userInfoDao.getTotalUserInfo(map);
+    }
+
+    @Override
+    public int updateUserInfo(UserInfo userInfo) {
+        userInfoDao.updateUser(userInfo.getUser());
+        return userInfoDao.updateUserInfo(userInfo);
     }
 
     @Override
     public int addUserInfo(UserInfo userInfo) {
-        return userInfoDao.insert(userInfo);
+         userInfoDao.insertUser(userInfo.getUser());
+         userInfo.setUid(userInfo.getUser().getId());
+         return userInfoDao.insertUserInfo(userInfo);
     }
 
     @Override
     public int deleteUserInfo(Integer id) {
-        return userInfoDao.deleteByPrimaryKey(id);
+        userInfoDao.deleteUserInfo(id);
+        return userInfoDao.deleteUser(id);
     }
 }
