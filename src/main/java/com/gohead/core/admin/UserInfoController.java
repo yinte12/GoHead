@@ -64,6 +64,8 @@ public class UserInfoController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Result addUserInfo(@RequestBody UserInfo userInfo) throws Exception {
+        String MD5pwd = MD5Util.MD5Encode(userInfo.getUser().getPassword(), "UTF-8");
+        userInfo.getUser().setPassword(MD5pwd);
         int resultCode = userInfoService.addUserInfo(userInfo);
         if (resultCode > 0) {
             return ResultGenerator.genSuccessResult();
