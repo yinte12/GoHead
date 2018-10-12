@@ -47,7 +47,7 @@ public class UserInfoController {
     public CountResult list(@PathVariable("page") String page,
                             @PathVariable("pageSize") String pageSize,
                             HttpServletRequest request) throws Exception {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         if (page != null && pageSize != null) {
             PageBean pageBean = new PageBean(Integer.valueOf(page),
                     Integer.valueOf(pageSize));

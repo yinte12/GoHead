@@ -1,11 +1,17 @@
 package com.gohead.core.websocket;
 
+import com.gohead.core.entity.UserInfo;
+import com.gohead.core.service.UserInfoService;
 import org.apache.log4j.Logger;
+import org.springframework.web.socket.server.standard.SpringConfigurator;
 
+import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint("/websocket/{userId}")
+@ServerEndpoint(value = "/websocket/{userId}", configurator = SpringConfigurator.class)
 public class SimpleWebSocket {
     private static final Logger log = Logger.getLogger(SimpleWebSocket.class);// 日志文件
 
@@ -25,6 +31,9 @@ public class SimpleWebSocket {
     private Session session;
 
     private static Map<String, Session> ssrSessions = new ConcurrentHashMap<>();
+
+    @Resource
+    private UserInfoService userInfoService;
 
     /**
      * 连接建立成功调用的方法
@@ -37,6 +46,12 @@ public class SimpleWebSocket {
         ssrSessions.put(userId, session);
         addOnlineCount();           //在线数加1
         log.info("有新连接加入！" + userId + "当前在线人数为" + getOnlineCount());
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("start", 1);
+        map.put("size", 10);
+        List<UserInfo> list = userInfoService.findUserInfo(map);
+        ssrSessions.get(userId).getAsyncRemote().sendText(list.toString());
     }
 
     /**
